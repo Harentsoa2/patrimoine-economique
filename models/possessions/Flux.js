@@ -18,7 +18,7 @@ export default class Flux extends Possession {
 
 
   getValeur(date) {
-    if (this.dateFin == this.dateDebut || this.dateFin <= new Date) {
+    if (this.dateFin == this.dateDebut || (this.dateFin && this.dateFin <= new Date())) {
       return 0;
     }
     else {

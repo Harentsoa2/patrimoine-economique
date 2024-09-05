@@ -13,7 +13,7 @@ import './css/style.css';
 export default function ListPossession() {
 
     const [possessions, setPossessions] = useState([]);
-    const [editingPossession, setEditingPossession] = useState(null)
+    const [editingPossession, setEditingPossession] = useState(null);
     const [date1, setDate1] = useState();
     const [date2, setDate2] = useState();
     const [showChart, setShowChart] = useState(false);

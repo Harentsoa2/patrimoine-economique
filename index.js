@@ -14,7 +14,10 @@ import { loadavg } from 'os';
 
 
 const app = express();
-const port = 3000;
+const http = require('http');
+
+const port = process.env.PORT || 3000;
+const server = http.createServer(app);
 
 // Middleware pour parser le JSON
 app.use(json());
@@ -156,13 +159,14 @@ app.post('/api/getValeur', (req, res) => {
     console.log(dates);
     const patrimoine = new Patrimoine(JohnDoe, possessions);    
     const values = dates.map(date => patrimoine.getValeur(new Date(date)));
+    console.log(values);
     res.json({ values: values, message: `Values retrieved successfully` });
 });
 
 
 
 // Démarrer le serveur
-app.listen(port, () => {
+server.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
 });
 

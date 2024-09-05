@@ -19,7 +19,7 @@
           },
           "libelle": "Tablette",
           "valeur": 850000,
-          "dateDebut": "2023-12-25T00:00:00.000Z",
+          "dateDebut": "2024-09-01T00:00:00.000Z",
           "dateFin": null,
           "tauxAmortissement": 10
         },
@@ -42,7 +42,7 @@
           "libelle": "MacBook",
           "valeur": 2000,
           "dateDebut": "2024-08-30T00:00:00.000Z",
-          "dateFin": "2039-07-28T00:00:00.000Z",
+          "dateFin": null,
           "tauxAmortissement": 10
         },
         {
@@ -52,11 +52,11 @@
           },
           "libelle": "Alternance",
           "valeur": 0,
-          "dateDebut": "2024-08-01T00:00:00.000Z",
-          "dateFin": "2041-06-28T00:00:00.000Z",
+          "dateDebut": "2024-09-03T00:00:00.000Z",
+          "dateFin": null,
           "tauxAmortissement": 0,
           "jour": 1,
-          "valeurConstante": 0
+          "valeurConstante": 500000
         }
       ]
     }
