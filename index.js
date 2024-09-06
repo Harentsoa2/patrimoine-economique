@@ -26,9 +26,9 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 app.use(cors({
-    origin: 'http://localhost:5173',
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type'],
+  origin: 'https://ui-web2-exam-2.onrender.com', // L'origine de votre frontend en production
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Les méthodes HTTP que vous autorisez
+  allowedHeaders: ['Content-Type'], // Les en-têtes autorisés
 }));
 
 
