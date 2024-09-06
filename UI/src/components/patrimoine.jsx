@@ -4,11 +4,11 @@ import React, { useState, useEffect } from 'react';
 import Navbar from "./navbar";
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import './css/style.css'
+const apiUrl = import.meta.env.VITE_API_URL;
 
 export default function Patrimoine() {
-    const [showChart, setShowChart] = useState(false);
-    const [date1, setDate1] = useState();
-    const [date2, setDate2] = useState();
+    const [date1, setDate1] = useState(new Date("06-01-2024"));
+    const [date2, setDate2] = useState(new Date("06-01-2028"));
     const [date, setDate] = useState();
     const [valeur, setValeur] = useState(0);
 
@@ -19,7 +19,7 @@ export default function Patrimoine() {
 
     async function getValeur(e) {
         e.preventDefault();
-        fetch('http://localhost:3000/api/getValeur', {
+        fetch(apiUrl+'/api/getValeur', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -50,7 +50,7 @@ export default function Patrimoine() {
                 </div>
                 <Button type='submit'>Range</Button>
             </form>
-            {showChart ? <LineChart startDate={date1} endDate={date2} /> : <div className="b1">Choisir les intervalles de Date</div>}
+            <LineChart startDate={date1} endDate={date2} /> 
             <div className="b2">
                 <form onSubmit={(e) => getValeur(e)} className="d-flex">
                     <div>
@@ -59,7 +59,7 @@ export default function Patrimoine() {
                     </div>
                     <Button type='submit'>save</Button>
                 </form>
-                <p>Valeur du patrimoine : {valeur}</p>
+                <p>Valeur du patrimoine : {valeur.toFixed(2)}</p>
             </div>
         </>
     );

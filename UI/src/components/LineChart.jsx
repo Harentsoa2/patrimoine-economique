@@ -3,6 +3,8 @@ import { Line } from 'react-chartjs-2';
 import { format, differenceInDays, addDays } from 'date-fns';
 import React, { useState, useEffect } from 'react';
 
+const apiUrl = import.meta.env.VITE_API_URL;
+
 const generateDateLabels = (startDate, endDate) => {
   const start = new Date(startDate);
   const end = new Date(endDate);
@@ -28,7 +30,7 @@ const generateDateLabels = (startDate, endDate) => {
     const labels = generateDateLabels(startDate, endDate);
 
     // Send labels to the backend and get the respective values using fetch
-    fetch('http://localhost:3000/api/getValeur', {
+    fetch(apiUrl+'/api/getValeur', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

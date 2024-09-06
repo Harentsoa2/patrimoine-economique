@@ -13,24 +13,35 @@
       },
       "possessions": [
         {
+          "id": 1,
+          "possesseur": {
+            "nom": "John Doe"
+          },
+          "libelle": "MacBook Pro",
+          "valeur": 4300000,
+          "dateDebut": "2023-12-25T00:00:00.000Z",
+          "dateFin": null,
+          "tauxAmortissement": 5
+        },
+        {
           "id": 2,
           "possesseur": {
             "nom": "John Doe"
           },
-          "libelle": "Tablette",
-          "valeur": 850000,
-          "dateDebut": "2024-09-01T00:00:00.000Z",
+          "libelle": "Compte épargne",
+          "valeur": 500000,
+          "dateDebut": "2019-01-06T00:00:00.000Z",
           "dateFin": null,
-          "tauxAmortissement": 10
+          "tauxAmortissement": -5
         },
         {
           "id": 3,
           "possesseur": {
             "nom": "John Doe"
           },
-          "libelle": "Phone",
-          "valeur": 5000,
-          "dateDebut": "2024-08-27T00:00:00.000Z",
+          "libelle": "Clothes",
+          "valeur": 2000000,
+          "dateDebut": "2020-01-01T00:00:00.000Z",
           "dateFin": null,
           "tauxAmortissement": 10
         },
@@ -39,24 +50,48 @@
           "possesseur": {
             "nom": "John Doe"
           },
-          "libelle": "MacBook",
-          "valeur": 2000,
-          "dateDebut": "2024-08-30T00:00:00.000Z",
+          "libelle": "Alternance",
+          "valeur": 600000,
+          "dateDebut": "2023-02-13T00:00:00.000Z",
           "dateFin": null,
-          "tauxAmortissement": 10
+          "tauxAmortissement": 0,
+          "jour": 1,
+          "valeurConstante": 600000
         },
         {
           "id": 5,
           "possesseur": {
             "nom": "John Doe"
           },
-          "libelle": "Alternance",
-          "valeur": 0,
-          "dateDebut": "2024-09-03T00:00:00.000Z",
+          "libelle": "Survie",
+          "valeur": 300000,
+          "dateDebut": "2023-02-13T00:00:00.000Z",
           "dateFin": null,
           "tauxAmortissement": 0,
-          "jour": 1,
-          "valeurConstante": 500000
+          "jour": 2,
+          "valeurConstante": -300000
+        },
+        {
+          "id": 6,
+          "possesseur": {
+            "nom": "John Doe"
+          },
+          "libelle": "Redmi Note 9 (Lost)",
+          "valeur": 800000,
+          "dateDebut": "2022-12-29T00:00:00.000Z",
+          "dateFin": "2022-12-29T00:00:00.000Z",
+          "tauxAmortissement": 15
+        },
+        {
+          "id": 7,
+          "possesseur": {
+            "nom": "John Doe"
+          },
+          "libelle": "Galaxy S23 (gifted)",
+          "valeur": 1600000,
+          "dateDebut": "2024-09-06",
+          "dateFin": null,
+          "tauxAmortissement": 10
         }
       ]
     }

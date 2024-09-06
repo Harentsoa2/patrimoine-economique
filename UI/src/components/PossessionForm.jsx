@@ -2,7 +2,9 @@ import React, { useState, useEffect, useImperativeHandle } from 'react';
 import Button from 'react-bootstrap/Button';
 import './css/style.css'
 
-export default function PossessionForm({ onSubmit, editingPossession, onClose}) {
+const apiUrl = import.meta.env.VITE_API_URL;
+
+export default function PossessionForm({ onSubmit, editingPossession, onClose, date }) {
   const [formType, setFormType] = useState("");
   const [libelle, setLibelle] = useState("");
   const [valeur, setValeur] = useState(0);
@@ -26,7 +28,11 @@ export default function PossessionForm({ onSubmit, editingPossession, onClose}) 
   useEffect(() => {
     if (editingPossession) {
       setLibelle(editingPossession.libelle);
-      setValeur(editingPossession.valeur);
+      if (editingPossession.jour) {
+        setValeur(editingPossession.valeurConstante);
+      } else {
+        setValeur(editingPossession.valeur);
+      }
       setDateDebut(formatDate(editingPossession.dateDebut));
       setDateFin(formatDate(editingPossession.dateFin));
       setTauxAmortissement(editingPossession.tauxAmortissement);
@@ -45,8 +51,8 @@ export default function PossessionForm({ onSubmit, editingPossession, onClose}) 
     if (formType === "bienMateriel") {
       const method = editingPossession ? 'PUT' : 'POST';
       const url = editingPossession
-        ? `http://localhost:3000/api/BienMateriel/${editingPossession.id}`
-        : 'http://localhost:3000/api/BienMateriel';
+        ? apiUrl + `/api/BienMateriel/${editingPossession.id}`
+        : apiUrl + '/api/BienMateriel';
 
       try {
         const response = await fetch(url, {
@@ -74,8 +80,8 @@ export default function PossessionForm({ onSubmit, editingPossession, onClose}) 
     if (formType === "flux") {
       const method = editingPossession ? 'PUT' : 'POST';
       const url = editingPossession
-        ? `http://localhost:3000/api/Flux/${editingPossession.id}`
-        : 'http://localhost:3000/api/Flux';
+        ? apiUrl + `/api/Flux/${editingPossession.id}`
+        : apiUrl + '/api/Flux';
 
       try {
         const response = await fetch(url, {
@@ -198,15 +204,6 @@ export default function PossessionForm({ onSubmit, editingPossession, onClose}) 
               value={dateFin}
               onChange={(e) => setDateFin(e.target.value)}
 
-            />
-          </div>
-          <div>
-            <label>Taux d'Amortissement:</label>
-            <input
-              type="number"
-              value={tauxAmortissement}
-              onChange={(e) => setTauxAmortissement(parseFloat(e.target.value))}
-              required
             />
           </div>
           <div>

@@ -13,12 +13,12 @@ export default class Flux extends Possession {
     this.dateDebut = dateDebut;
     this.dateFin = dateFin;
     this.valeurConstante = valeur
-
+    console.log(libelle);
   }
 
 
   getValeur(date) {
-    if (this.dateFin == this.dateDebut || (this.dateFin && this.dateFin <= new Date()) || date < this.dateDebut) {
+    if (this.dateFin == this.dateDebut || (this.dateFin && this.dateFin <= new Date())) {
       return 0;
     }
     else {
@@ -46,7 +46,6 @@ export default class Flux extends Possession {
       }
 
       const montantTotal = totalMois * this.valeurConstante;
-
       return montantTotal;
     }
   }

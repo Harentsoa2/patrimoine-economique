@@ -2,8 +2,8 @@ import express, { json } from 'express';
 import { readFileSync, writeFileSync } from 'fs';
 import { join } from 'path';
 import path from 'path';
-import { fileURLToPath } from 'url'; 
-import cors from 'cors';  
+import { fileURLToPath } from 'url';
+import cors from 'cors';
 import Patrimoine from './models/Patrimoine.js';
 import Possession from './models/possessions/Possession.js';
 import BienMateriel from './models/possessions/BienMateriel.js';
@@ -11,10 +11,10 @@ import Flux from './models/possessions/Flux.js';
 import Personne from './models/Personne.js';
 import { log } from 'console';
 import { loadavg } from 'os';
+import http from 'http';
 
 
 const app = express();
-const http = require('http');
 
 const port = process.env.PORT || 3000;
 const server = http.createServer(app);
@@ -26,10 +26,10 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 app.use(cors({
-    origin: 'http://localhost:5173',  
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],  
-    allowedHeaders: ['Content-Type'],  
-  }));
+    origin: 'http://localhost:5173',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type'],
+}));
 
 
 // Chemin vers le fichier JSON
@@ -67,7 +67,7 @@ app.get('/api/possessions', (req, res) => {
 
 // Route POST pour ajouter une nouvelle possessions
 app.post('/api/BienMateriel', (req, res) => {
-    const {libelle, valeur, dateDebut, dateFin, tauxAmortissement} = req.body;
+    const { libelle, valeur, dateDebut, dateFin, tauxAmortissement } = req.body;
     let data = readUsersFromFile();
     const possessions = data.find(item => item.model === 'Patrimoine')?.data.possessions;
     const id = possessions.length > 0 ? possessions[possessions.length - 1].id + 1 : 1;
@@ -76,13 +76,13 @@ app.post('/api/BienMateriel', (req, res) => {
     possessions.push(newPossession);
     writeUsersToFile(data);
 
-    res.json({ possession: newPossession});
+    res.json({ possession: newPossession });
 
 });
 
 
 app.post('/api/Flux', (req, res) => {
-    const {libelle, valeur, dateDebut, dateFin, tauxAmortissement, jour} = req.body;
+    const { libelle, valeur, dateDebut, dateFin, tauxAmortissement, jour } = req.body;
     let data = readUsersFromFile();
     const possessions = data.find(item => item.model === 'Patrimoine')?.data.possessions;
     const id = possessions.length > 0 ? possessions[possessions.length - 1].id + 1 : 1;
@@ -91,47 +91,47 @@ app.post('/api/Flux', (req, res) => {
     possessions.push(newPossession);
     writeUsersToFile(data);
 
-    res.json({ possession: newPossession});
+    res.json({ possession: newPossession });
 
 })
 
 app.put('/api/BienMateriel/:id', (req, res) => {
     const { id } = req.params;
-    const {libelle, valeur, dateDebut, dateFin, tauxAmortissement} = req.body;
+    const { libelle, valeur, dateDebut, dateFin, tauxAmortissement } = req.body;
     let data = readUsersFromFile();
     const possessions = data.find(item => item.model === 'Patrimoine')?.data.possessions;
     const possession = possessions.find(possession => possession.id === parseInt(id));
 
-    if(possession){
+    if (possession) {
         possession.libelle = libelle;
         possession.valeur = valeur,
-        possession.dateDebut = new Date(dateDebut);
+            possession.dateDebut = new Date(dateDebut);
         possession.dateFin = new Date(dateFin);
         possession.tauxAmortissement = tauxAmortissement;
         writeUsersToFile(data);
         res.json({ message: `Possession ${id} updated successfully`, possession });
-    }else{
+    } else {
         res.status(404).json({ message: `User with ID ${id} not found` });
     }
 })
 
 app.put('/api/Flux/:id', (req, res) => {
     const { id } = req.params;
-    const {libelle, valeur, dateDebut, dateFin, tauxAmortissement, jour} = req.body;
+    const { libelle, valeur, dateDebut, dateFin, tauxAmortissement, jour } = req.body;
     let data = readUsersFromFile();
     const possessions = data.find(item => item.model === 'Patrimoine')?.data.possessions;
     const possession = possessions.find(possession => possession.id === parseInt(id));
 
-    if(possession){
+    if (possession) {
         possession.libelle = libelle;
         possession.valeurConstante = valeur,
-        possession.dateFin = new Date(dateDebut);
-        possession.dateDebut = new Date(dateFin);
+            possession.dateFin = new Date(dateFin);
+        possession.dateDebut = new Date(dateDebut);
         possession.tauxAmortissement = tauxAmortissement;
         possession.jour = jour;
         writeUsersToFile(data);
         res.json({ message: `Possession ${id} updated successfully`, possession });
-    }else{
+    } else {
         res.status(404).json({ message: `User with ID ${id} not found` });
     }
 })
@@ -151,13 +151,28 @@ app.delete('/api/possessions/:id', (req, res) => {
     }
 })
 
+app.put('/api/edit/:id', (req, res) => {
+    const { id } = req.params;
+    let data = readUsersFromFile();
+    const possessions = data.find(item => item.model === 'Patrimoine')?.data.possessions;
+    const possession = possessions.find(possession => possession.id === parseInt(id));
+
+    if (possession) {
+        possession.dateFin = possession.dateDebut
+        writeUsersToFile(data);
+        res.json({ message: `Posssession ${id} closed successfully` });
+    } else {
+        res.status(404).json({ message: `Possession with ID ${id} not found` });
+    }
+})
+
 app.post('/api/getValeur', (req, res) => {
-    const { dates }  = req.body;
+    const { dates } = req.body;
     let data = readUsersFromFile();
     const possessions = data.find(item => item.model === 'Patrimoine')?.data.possessions;
     console.log(possessions);
     console.log(dates);
-    const patrimoine = new Patrimoine(JohnDoe, possessions);    
+    const patrimoine = new Patrimoine(JohnDoe, possessions);
     const values = dates.map(date => patrimoine.getValeur(new Date(date)));
     console.log(values);
     res.json({ values: values, message: `Values retrieved successfully` });
