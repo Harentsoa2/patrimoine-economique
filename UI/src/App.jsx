@@ -23,23 +23,7 @@ function App() {
 // il est temp de jouer un peu
 // il est temp de jouer un peu
 
-// il est temp de jouer un peu
-// il est temp de jouer un peu
 
-
-
-// il est temp de jouer un peu
-// il est temp de jouer un peu
-
-// il est temp de jouer un peu
-// il est temp de jouer un peu
-
-// il est temp de jouer un peu
-// il est temp de jouer un peu
-
-
-// il est temp de jouer un peu
-// il est temp de jouer un peu
 
 
 export default App;
